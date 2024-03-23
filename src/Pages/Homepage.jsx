@@ -4,7 +4,12 @@ import ProductList from "./Productlist";
 
 function HomePage({ setIsLoggedIn }) {
   const [products, setProducts] = useState([]);
-
+  
+  const removeProduct = (index) => {
+    const updatedProducts = [...products];
+    updatedProducts.splice(index, 1);
+    setProducts(updatedProducts);
+  };
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
@@ -22,7 +27,7 @@ function HomePage({ setIsLoggedIn }) {
       </div>
       <div>
         <AddProductForm products={products} setProducts={setProducts} />
-        <ProductList products={products} />
+        <ProductList products={products} removeProduct={removeProduct}/>
       </div>
     </>
   );
